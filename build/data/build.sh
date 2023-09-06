@@ -10,4 +10,4 @@ cd OpenSpace
 mkdir build
 
 cmake -S . -B ./build
-cmake --build build --parallel 16
+cmake --build build --parallel 8

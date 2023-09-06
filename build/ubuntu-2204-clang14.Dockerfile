@@ -34,4 +34,4 @@ RUN apt-get install -y libmpv-dev
 RUN apt-get install -y libvulkan-dev
 
 # Prepare the build settings
-COPY build.sh /
+COPY data/build.sh /

@@ -20,20 +20,19 @@ RUN apt-get install -y ca-certificates
 ADD data/llvm.list /etc/apt/sources.list.d/
 ADD data/llvm-snapshot.gpg.key.gpg /etc/apt/trusted.gpg.d/
 RUN apt-get update
-RUN apt-get install -y clang-17
-RUN apt-get install -y clang-tools-17
-RUN apt-get install -y clang-format-17
-RUN apt-get install -y libfuzzer-17-dev
-RUN apt-get install -y lldb-17
-RUN apt-get install -y lld-17
-RUN apt-get install -y libc++-17-dev
-RUN apt-get install -y libc++abi-17-dev
-RUN apt-get install -y libomp-17-dev
-RUN apt-get install -y libunwind-17-dev
-RUN apt-get install -y libpolly-17-dev
-RUN apt-get install -y libclc-17-dev
-RUN ln -s /usr/bin/clang++-17 /usr/bin/clang++
-RUN ln -s /usr/bin/clang-17 /usr/bin/clang
+RUN apt-get install -y clang-15
+RUN apt-get install -y clang-tools-15
+RUN apt-get install -y clang-format-15
+RUN apt-get install -y libfuzzer-15-dev
+RUN apt-get install -y lldb-15
+RUN apt-get install -y lld-15
+RUN apt-get install -y libc++-15-dev
+RUN apt-get install -y libc++abi-15-dev
+RUN apt-get install -y libomp-15-dev
+RUN apt-get install -y libunwind-15-dev
+RUN apt-get install -y libclc-15-dev
+RUN ln -s /usr/bin/clang++-15 /usr/bin/clang++
+RUN ln -s /usr/bin/clang-15 /usr/bin/clang
 
 ENV CC=/usr/bin/clang
 ENV CXX=/usr/bin/clang++

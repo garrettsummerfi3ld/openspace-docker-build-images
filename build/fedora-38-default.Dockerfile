@@ -29,4 +29,4 @@ RUN dnf install -y harfbuzz-devel
 RUN dnf install -y zziplib-devel
 RUN dnf install -y mpv-devel
 
-COPY build.sh /
+COPY data/build.sh /
