@@ -14,8 +14,10 @@ To then run that Docker image as a container call: `docker run --gpus all --inte
 
 Specifically for containers that are going to be reused, it can be useful to give a `--name {}` to the container which makes it easier to recognize in the containers list.
 
+Please also note that the example commands here are meant to be executed from the same folder in which the Dockerfile is located.
+
 # `build`
-The Dockerfiles in this folder create build environments that install all dependencies necessary to compile OpenSpace. The container will also contain a `build.sh` at the root of the filesystem that will automatically clone OpenSpace and then build it using the environment. The `build.sh` script can take one optional argument, which is the branch that should be built. If the parameter is left out, the `master` branch is built instead.
+The Dockerfiles in this folder create build environments that install all dependencies necessary to compile OpenSpace. The `build/build-all.bat` script will automatically build all of the images contained in the folder. The container will also contain a `build.sh` at the root of the filesystem that will automatically clone OpenSpace and then build it using the environment. The `build.sh` script can take one optional argument, which is the branch that should be built. If the parameter is left out, the `master` branch is built instead.
 
 The naming scheme for the Docker files is: `{OS/distribution}-{OS version}-{compiler}.Dockerfile`.
 
