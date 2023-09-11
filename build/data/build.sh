@@ -9,7 +9,7 @@ if [ ${#args_array[@]} -eq 0 ]; then
   args_array+=("master")
 fi
 
-if [ ${#args_array[@]} -eq 1]; then
+if [ ${#args_array[@]} -eq 1 ]; then
   args_array+=("https://github.com/OpenSpace/OpenSpace")
 fi
 
