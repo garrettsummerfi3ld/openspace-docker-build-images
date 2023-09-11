@@ -18,22 +18,20 @@ RUN chmod 0440 /etc/sudoers.d/openspace && \
     cd /home/openspace && \
     chown openspace:openspace -R .
 
-RUN apt update
-ENV DEBIAN_FRONTEND=noninteractive
-RUN apt-get install -y tzdata
-RUN ln -fs /usr/share/zoneinfo/America/Denver /etc/localtime
-RUN dpkg-reconfigure --frontend noninteractive tzdata
+# ENV DEBIAN_FRONTEND=noninteractive
+# RUN apt-get install -y tzdata
+# RUN ln -fs /usr/share/zoneinfo/America/Denver /etc/localtime
+# RUN dpkg-reconfigure --frontend noninteractive tzdata
 RUN apt-get install -y x11-xserver-utils
 RUN apt-get install -y xauth
-RUN apt-get install -y sudo
-RUN apt-get install -y gpg
-RUN apt-get install -y ca-certificates
+# RUN apt-get install -y sudo
+# RUN apt-get install -y gpg
+# RUN apt-get install -y ca-certificates
 
 RUN echo "user ALL=(ALL) ALL" >> /etc/sudoers
 
-RUN apt-get install -y nemo
-RUN apt-get install -y software-properties-common
-RUN apt-get install -y synaptic
+# RUN apt-get install -y software-properties-common
+# RUN apt-get install -y synaptic
 RUN apt-get install -y glew-utils
 RUN apt-get install -y libpng-dev
 RUN apt-get install -y libcurl4-openssl-dev
@@ -41,7 +39,10 @@ RUN apt-get install -y libcurl4-openssl-dev
 RUN su openspace;
 RUN chown -R openspace:openspace .;
 RUN mkdir -p /home/openspace
-#Build OpenSpace
+
+# Build OpenSpace
+USER openspace
+
 RUN su openspace; \
     chown -R openspace:openspace .; \
     mkdir -p /home/openspace/source; \
@@ -55,8 +56,6 @@ RUN su openspace; \
     -DASSIMP_BUILD_MINIZIP=1 /home/openspace/source/OpenSpace; \
     make -j4
 
-USER openspace
 ENV HOME /home/openspace
 CMD /usr/bin/bash
-COPY data/build.sh /
 

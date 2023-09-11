@@ -34,3 +34,18 @@ To build the Jenkins docker, follow the following steps:
    1. Build the Jenkins image and provide the arguments: `docker build --tag jenkins-openspace-ubuntu-2204-clang14 --file jenkins.Dockerfile --build-arg IMAGE=openspace-ubuntu-2204-clang14 --build-arg COMPUTER_NAME=linux-clang-1 --build-arg SECRET=mysecret .`. The `tag`, again, is arbitrary, but it makes sense to use something that is related to the tag specified in `IMAGE`
 1. Run the Docker image in a container. The Jenkins container will automatically set everything up, so no `--interactive` is necessary. If you don't want to see what happens either, the `--tty` can be omitted as well, leading to: `docker run jenkins-openspace-ubuntu-2204-clang14`. If this is installed permanently on a machine also consider adding `--restart always` to make sure that the container is always running and give it a `--name {name}` at the same time so that the container is recognizable and `--detach` so that it does not attach to the current commandline window.
 
+# `run`
+The Dockerfiles in this folder contain instructions to actually run OpenSpace inside a container. Currently, there is only a single Dockerfile, that can be based on any of the Dockerfiles in the `build` folder to run that specific distro-compiler combination. The image to be used as a base is specified as a build argument for this Dockerfile.
+
+To build the run image, follow the following steps:
+1. Make sure you have the following requirements
+   1. Ubuntu 22.04 as the __host__ operating system
+   1. An Nvidia GPU
+   1. Nvidia display driver installed
+   1. 30 GB or more free hard drive space
+   1. Install the nvidia-container-runtime on the host by following the instructions found [here](https://nvidia.github.io/nvidia-container-runtime/) and also [here](https://github.com/NVIDIA/nvidia-container-runtime)
+1. Build one of the images from the `build` folder, for example "ubuntu-2204-clang14.Dockerfile" through `docker build --tag openspace-ubuntu-2204-clang14 --file ubuntu-2204-clang14.Dockerfile .`. The specific `tag` name is arbitrary
+1. Build the run image, which requires an argument to the build:
+   1. `IMAGE`: The `tag` of the image that should be used as the basis for this machine
+   1. Build the run image and provide the arguments: `docker build --tag run-ubuntu-2204-clang14 --file run.Dockerfile --build-arg IMAGE=openspace-ubuntu-2204-clang14 .`
+1. Run the image in a container by either running the `run/run-container.sh` on the host machine, which contains the necessary arguments for the host GPU access and host display manager access.
