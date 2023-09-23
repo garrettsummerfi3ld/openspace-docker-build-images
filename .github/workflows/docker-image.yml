@@ -1,0 +1,21 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "**" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build all build/ Docker images
+      working-directory: ${{ github.workspace }}/build
+      run: |
+        for f in *.Dockerfile; do
+          echo "Building $f"
+          docker build --tag "openspace-${f%.Dockerfile}" --file "$f" .
+        done
