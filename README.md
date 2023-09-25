@@ -6,7 +6,7 @@ This repository is a collection of a number of Dockerfile configuration files th
 If you are on Windows 11, the easiest way is to open a Powershell terminal and install Docker from there: `winget install Docker.DockerDesktop`.  Otherwise you can download the installer from [here](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe).
 
 ### Linux
-You can install Docker either via your package manager or through Docker themselves. There is a Docker Desktop application you can use to help develop with Docker on Linux as well. More information can be found [here](https://docs.docker.com/engine/install/)
+You can install Docker either via your package manager or through Docker themselves. There is a Docker Desktop application you can use to help develop with Docker on Linux as well. More information can be found [here](https://docs.docker.com/engine/install/).
 
 ### macOS
 You can install Docker Desktop by going [here](https://docs.docker.com/get-docker/) to install Docker Desktop. This will install the Docker Desktop application and the necessary CLI for Docker.
