@@ -5,6 +5,12 @@ This repository is a collection of a number of Dockerfile configuration files th
 ### Windows
 If you are on Windows 11, the easiest way is to open a Powershell terminal and install Docker from there: `winget install Docker.DockerDesktop`.  Otherwise you can download the installer from [here](https://desktop.docker.com/win/main/amd64/Docker%20Desktop%20Installer.exe).
 
+### Linux
+You can install Docker either via your package manager or through Docker themselves. There is a Docker Desktop application you can use to help develop with Docker on Linux as well. More information can be found [here](https://docs.docker.com/engine/install/)
+
+### macOS
+You can install Docker Desktop by going [here](https://docs.docker.com/get-docker/) to install Docker Desktop. This will install the Docker Desktop application and the necessary CLI for Docker.
+
 ## Getting started
 Please note that this is just a quick and dirty getting started guide. For all commands refer to [documentation](https://docs.docker.com/) for more information. The general workflow for Docker is that we _build_ an **image** from a **Dockerfile**, and then _run_ an **image** as a **container**.
 
@@ -17,7 +23,7 @@ Specifically for containers that are going to be reused, it can be useful to giv
 Please also note that the example commands here are meant to be executed from the same folder in which the Dockerfile is located.
 
 # `build`
-The Dockerfiles in this folder create build environments that install all dependencies necessary to compile OpenSpace. The `build/build-all.bat` script will automatically build all of the images contained in the folder. The container will also contain a `build.sh` at the root of the filesystem that will automatically clone OpenSpace and then build it using the environment. The `build.sh` script can take one optional argument, which is the branch that should be built. If the parameter is left out, the `master` branch is built instead.
+The Dockerfiles in this folder create build environments that install all dependencies necessary to compile OpenSpace. The `build/build-all.bat` script will automatically build all of the images contained in the folder on Windows machines. The `build/build-all.sh` script will do the same thing as the Windows script for Linux/macOS. The container will also contain a `build.sh` at the root of the filesystem that will automatically clone OpenSpace and then build it using the environment. The `build.sh` script can take one optional argument, which is the branch that should be built. If the parameter is left out, the `master` branch is built instead.
 
 The naming scheme for the Docker files is: `{OS/distribution}-{OS version}-{compiler}.Dockerfile`.
 
