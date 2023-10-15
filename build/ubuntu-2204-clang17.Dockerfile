@@ -17,7 +17,7 @@ RUN apt-get install -y software-properties-common
 RUN apt-get install -y gnupg
 RUN apt-get install -y apt-transport-https
 RUN apt-get install -y ca-certificates
-ADD data/llvm.list /etc/apt/sources.list.d/
+ADD data/llvm-17.list /etc/apt/sources.list.d/
 ADD data/llvm-snapshot.gpg.key.gpg /etc/apt/trusted.gpg.d/
 RUN mv /etc/apt/sources.list.d/llvm-17.list /etc/apt/sources.list.d/llvm.list
 RUN apt-get update
