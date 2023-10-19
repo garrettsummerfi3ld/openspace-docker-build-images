@@ -3,19 +3,18 @@ FROM ubuntu:22.04
 RUN apt-get update
 
 # Get a supported version for CMake and install
-RUN apt-get install -y ca-certificates gpg wget
-RUN wget -O - https://apt.kitware.com/keys/kitware-archive-latest.asc 2>/dev/null | gpg --dearmor - | sudo tee /usr/share/keyrings/kitware-archive-keyring.gpg >/dev/null
-RUN echo 'deb [signed-by=/usr/share/keyrings/kitware-archive-keyring.gpg] https://apt.kitware.com/ubuntu/ jammy main' | sudo tee /etc/apt/sources.list.d/kitware.list >/dev/null
-RUN sudo rm /usr/share/keyrings/kitware-archive-keyring.gpg
-RUN sudo apt-get install kitware-archive-keyring
-RUN apt-get update
-RUN apt-get install -y cmake
+RUN apt-get install -y wget
+RUN wget https://github.com/Kitware/CMake/releases/download/v3.25.0/cmake-3.25.0-linux-x86_64.sh -q -O /tmp/cmake-install.sh
+RUN chmod u+x /tmp/cmake-install.sh
+RUN mkdir /opt/cmake
+RUN /tmp/cmake-install.sh --skip-license --prefix=/opt/cmake
+RUN ln -s /opt/cmake/bin/* /usr/local/bin
 
 # Set up the compiler
 RUN apt-get install -y build-essential
 RUN apt-get install -y git
 
-## Install GCC 11 and enable
+## Install GCC 12 and enable
 RUN apt-get install -y gcc-11 g++-11
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 110 --slave /usr/bin/g++ g++ /usr/bin/g++-11 --slave /usr/bin/gcov gcov /usr/bin/gcov-11
 RUN update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-11 120 --slave /usr/bin/g++ g++ /usr/bin/g++-11 --slave /usr/bin/gcov gcov /usr/bin/gcov-11
