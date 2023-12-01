@@ -27,5 +27,8 @@ RUN apt-get install -y qt6-base-dev
 RUN apt-get install -y libmpv-dev
 RUN apt-get install -y libvulkan-dev
 
+# Install dependencies for running unit tests
+RUN apt-get install -y xvfb
+
 # Prepare the build settings
 COPY data/build.sh /
