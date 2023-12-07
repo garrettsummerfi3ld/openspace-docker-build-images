@@ -17,24 +17,24 @@ RUN apt-get install -y software-properties-common
 RUN apt-get install -y gnupg
 RUN apt-get install -y apt-transport-https
 RUN apt-get install -y ca-certificates
-ADD data/llvm-17.list /etc/apt/sources.list.d/
+ADD data/llvm-16.list /etc/apt/sources.list.d/
 ADD data/llvm-snapshot.gpg.key.gpg /etc/apt/trusted.gpg.d/
-RUN mv /etc/apt/sources.list.d/llvm-17.list /etc/apt/sources.list.d/llvm.list
+RUN mv /etc/apt/sources.list.d/llvm-16.list /etc/apt/sources.list.d/llvm.list
 RUN apt-get update
-RUN apt-get install -y clang-17
-RUN apt-get install -y clang-tools-17
-RUN apt-get install -y clang-format-17
-RUN apt-get install -y libfuzzer-17-dev
-RUN apt-get install -y lldb-17
-RUN apt-get install -y lld-17
-RUN apt-get install -y libc++-17-dev
-RUN apt-get install -y libc++abi-17-dev
-RUN apt-get install -y libomp-17-dev
-RUN apt-get install -y libunwind-17-dev
-RUN apt-get install -y libpolly-17-dev
-RUN apt-get install -y libclc-17-dev
-RUN ln -s /usr/bin/clang++-17 /usr/bin/clang++
-RUN ln -s /usr/bin/clang-17 /usr/bin/clang
+RUN apt-get install -y clang-16
+RUN apt-get install -y clang-tools-16
+RUN apt-get install -y clang-format-16
+RUN apt-get install -y libfuzzer-16-dev
+RUN apt-get install -y lldb-16
+RUN apt-get install -y lld-16
+RUN apt-get install -y libc++-16-dev
+RUN apt-get install -y libc++abi-16-dev
+RUN apt-get install -y libomp-16-dev
+RUN apt-get install -y libunwind-16-dev
+RUN apt-get install -y libpolly-16-dev
+RUN apt-get install -y libclc-16-dev
+RUN ln -s /usr/bin/clang++-16 /usr/bin/clang++
+RUN ln -s /usr/bin/clang-16 /usr/bin/clang
 
 ENV CC=/usr/bin/clang
 ENV CXX=/usr/bin/clang++
@@ -52,9 +52,6 @@ RUN apt-get install -y libgdal-dev
 RUN apt-get install -y qt6-base-dev
 RUN apt-get install -y libmpv-dev
 RUN apt-get install -y libvulkan-dev
-
-# Install dependencies for running unit tests
-RUN apt-get install -y xvfb
 
 # Prepare the build settings
 COPY data/build.sh /
