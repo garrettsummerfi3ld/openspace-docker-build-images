@@ -32,4 +32,6 @@ RUN dnf install -y mpv-devel
 # Install dependencies for running unit tests
 RUN dnf install -y xorg-x11-server-Xvfb
 
+ENV CMAKE_EXPORT_COMPILE_COMMANDS=1
+
 COPY data/build.sh /

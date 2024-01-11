@@ -53,5 +53,7 @@ RUN apt-get install -y qt6-base-dev
 RUN apt-get install -y libmpv-dev
 RUN apt-get install -y libvulkan-dev
 
+ENV CMAKE_EXPORT_COMPILE_COMMANDS=1
+
 # Prepare the build settings
 COPY data/build.sh /

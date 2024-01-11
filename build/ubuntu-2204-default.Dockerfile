@@ -30,5 +30,7 @@ RUN apt-get install -y libvulkan-dev
 # Install dependencies for running unit tests
 RUN apt-get install -y xvfb
 
+ENV CMAKE_EXPORT_COMPILE_COMMANDS=1
+
 # Prepare the build settings
 COPY data/build.sh /
