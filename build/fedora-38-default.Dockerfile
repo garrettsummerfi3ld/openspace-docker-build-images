@@ -29,4 +29,7 @@ RUN dnf install -y harfbuzz-devel
 RUN dnf install -y zziplib-devel
 RUN dnf install -y mpv-devel
 
+# Install dependencies for running unit tests
+RUN dnf install -y xorg-x11-server-Xvfb
+
 COPY data/build.sh /
