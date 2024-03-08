@@ -53,6 +53,9 @@ RUN apt-get install -y qt6-base-dev
 RUN apt-get install -y libmpv-dev
 RUN apt-get install -y libvulkan-dev
 
+# Install dependencies for running unit tests
+RUN apt-get install -y xvfb
+
 ENV CMAKE_EXPORT_COMPILE_COMMANDS=1
 
 # Prepare the build settings

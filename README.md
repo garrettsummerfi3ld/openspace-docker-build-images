@@ -40,3 +40,12 @@ To build the Jenkins docker, follow the following steps:
    1. Build the Jenkins image and provide the arguments: `docker build --tag jenkins-openspace-ubuntu-2204-clang14 --file jenkins.Dockerfile --build-arg IMAGE=openspace-ubuntu-2204-clang14 --build-arg COMPUTER_NAME=linux-clang-1 --build-arg SECRET=mysecret .`. The `tag`, again, is arbitrary, but it makes sense to use something that is related to the tag specified in `IMAGE`
 1. Run the Docker image in a container. The Jenkins container will automatically set everything up, so no `--interactive` is necessary. If you don't want to see what happens either, the `--tty` can be omitted as well, leading to: `docker run jenkins-openspace-ubuntu-2204-clang14`. If this is installed permanently on a machine also consider adding `--restart always` to make sure that the container is always running and give it a `--name {name}` at the same time so that the container is recognizable and `--detach` so that it does not attach to the current commandline window.
 
+
+# `tools`
+Important: These Dockerfiles all require the `build/build-all.bat` to have been executed as they rely on the images created by it.
+
+The Dockerfiles in this folder setup an environment to use various useful tools easily, for example clang-tidy or static code analyzers.
+To build any of the docker images, follow the following steps:
+1. Build all the images in the `build` folder by using the `build/build-all.bat` scripts
+1. Build the tool image you want to use: `docker build --tag tool-openspace-clang_tidy --file clang_tidy.Dockerfile .`. The specific `tag` is arbitrary
+1. Run the Docker image in a container: `docker run  --tty --interactive tool-openspace-clang_tidy`.
