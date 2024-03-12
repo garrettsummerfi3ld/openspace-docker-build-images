@@ -32,12 +32,13 @@ for i in data:
 
   in_cef_wrapper = "libcef_dll_wrapper" in path
 
+  is_moc = "/moc_" in path
+
   is_extended_ext = is_ext | in_cef_wrapper
   in_allowed_ext = in_ghoul_not_ext | in_sgct_not_ext | in_launcher
 
-  should_reject = is_extended_ext & (not in_allowed_ext)
+  should_reject = (is_extended_ext & (not in_allowed_ext)) | is_moc
 
-  print(f'{path} -> {should_reject}')
   if (not should_reject):
     res.append(i)
 
