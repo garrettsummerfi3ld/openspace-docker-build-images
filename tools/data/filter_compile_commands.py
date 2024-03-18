@@ -12,10 +12,10 @@ f.close()
 res = []
 for i in data:
   path = ""
-  if "directory" in i:
-    path = i["directory"]
-  elif "file" in i:
+  if "file" in i:
     path = i["file"]
+  elif "directory" in i:
+    path = i["directory"]
   else:
     raise "No directory or file"
   is_ext = "/ext/" in path
@@ -33,11 +33,12 @@ for i in data:
   in_cef_wrapper = "libcef_dll_wrapper" in path
 
   is_moc = "/moc_" in path
+  is_qrc = "/qrc_" in path
 
   is_extended_ext = is_ext | in_cef_wrapper
   in_allowed_ext = in_ghoul_not_ext | in_sgct_not_ext | in_launcher
 
-  should_reject = (is_extended_ext & (not in_allowed_ext)) | is_moc
+  should_reject = (is_extended_ext & (not in_allowed_ext)) | is_moc | is_qrc
 
   if (not should_reject):
     res.append(i)
