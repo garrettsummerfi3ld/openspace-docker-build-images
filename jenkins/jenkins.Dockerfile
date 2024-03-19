@@ -16,4 +16,4 @@ ARG SECRET
 ENV secret=$SECRET
 
 # We also cannot use the array form of ENTRYPOINT as we need the shell to expand the environment variables
-ENTRYPOINT java -jar /agent.jar -url https://dev.openspaceproject.com/ -secret $secret -name $computer_name -workDir /jenkins
+ENTRYPOINT java -jar /agent.jar -url https://dev.openspaceproject.com/ -secret $secret -name $computer_name -workDir /var/jenkins
