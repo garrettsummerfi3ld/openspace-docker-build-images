@@ -2,7 +2,7 @@ ARG IMAGE
 FROM ${IMAGE}
 
 RUN apt-get install -y openjdk-17-jre
-RUN wget http://dev.openspaceproject.com/jnlpJars/agent.jar -q -O /agent.jar
+RUN wget https://dev.openspaceproject.com/jnlpJars/agent.jar -q -O /agent.jar
 RUN mkdir /var/jenkins
 
 # Our Jenkins tries to build everything with make and with ninja, so we need to install it
@@ -16,4 +16,4 @@ ARG SECRET
 ENV secret=$SECRET
 
 # We also cannot use the array form of ENTRYPOINT as we need the shell to expand the environment variables
-ENTRYPOINT java -jar /agent.jar -jnlpUrl http://dev.openspaceproject.com/computer/$computer_name/jenkins-agent.jnlp -secret $secret -workDir /var/jenkins
+ENTRYPOINT java -jar /agent.jar -url https://dev.openspaceproject.com/ -secret $secret -name $computer_name -workDir /jenkins
