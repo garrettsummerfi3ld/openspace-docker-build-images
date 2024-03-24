@@ -33,6 +33,10 @@ RUN apt-get install -y libomp-16-dev
 RUN apt-get install -y libunwind-16-dev
 RUN apt-get install -y libpolly-16-dev
 RUN apt-get install -y libclc-16-dev
+
+RUN add-apt-repository ppa:ubuntu-toolchain-r/test
+RUN apt-get install libstdc++6 libstdc++-13-dev
+
 RUN ln -s /usr/bin/clang++-16 /usr/bin/clang++
 RUN ln -s /usr/bin/clang-16 /usr/bin/clang
 

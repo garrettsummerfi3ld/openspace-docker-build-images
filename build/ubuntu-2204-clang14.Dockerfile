@@ -10,10 +10,15 @@ RUN mkdir /opt/cmake
 RUN /tmp/cmake-install.sh --skip-license --prefix=/opt/cmake
 RUN ln -s /opt/cmake/bin/* /usr/local/bin
 
-# Set up the compiler
+# Install the compiler
 RUN apt-get install -y build-essential
 RUN apt-get install -y git
 RUN apt-get install -y clang
+
+RUN add-apt-repository ppa:ubuntu-toolchain-r/test
+RUN apt-get install libstdc++6 libstdc++-13-dev
+
+# Setup the compiler
 RUN update-alternatives --install /usr/bin/clang++ clang++ /usr/bin/clang++-14 100
 RUN update-alternatives --install /usr/bin/clang clang /usr/bin/clang-14 100
 

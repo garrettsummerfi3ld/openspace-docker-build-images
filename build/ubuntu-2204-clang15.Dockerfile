@@ -29,6 +29,10 @@ RUN apt-get install -y libc++abi-15-dev
 RUN apt-get install -y libomp-15-dev
 RUN apt-get install -y libunwind-15-dev
 RUN apt-get install -y libclc-15-dev
+
+RUN add-apt-repository ppa:ubuntu-toolchain-r/test
+RUN apt-get install libstdc++6 libstdc++-13-dev
+
 RUN ln -s /usr/bin/clang++-15 /usr/bin/clang++
 RUN ln -s /usr/bin/clang-15 /usr/bin/clang
 
