@@ -34,8 +34,10 @@ RUN apt-get install -y libunwind-17-dev
 RUN apt-get install -y libpolly-17-dev
 RUN apt-get install -y libclc-17-dev
 
+RUN apt-get install -y software-properties-common
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test
-RUN apt-get install libstdc++6 libstdc++-13-dev
+RUN apt-get update
+RUN apt-get install -y libstdc++6 libstdc++-13-dev
 
 RUN ln -s /usr/bin/clang++-17 /usr/bin/clang++
 RUN ln -s /usr/bin/clang-17 /usr/bin/clang
