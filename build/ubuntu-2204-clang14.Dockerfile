@@ -15,7 +15,7 @@ RUN apt-get install -y build-essential
 RUN apt-get install -y git
 RUN apt-get install -y clang
 
-RUN apt-get install -y software-properties-common
+RUN apt-get install --reinstall ca-certificates
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test
 RUN apt-get update
 RUN apt-get install libstdc++6 libstdc++-13-dev
