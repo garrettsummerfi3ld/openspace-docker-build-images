@@ -37,7 +37,7 @@ RUN apt-get install -y libclc-16-dev
 RUN apt-get install -y software-properties-common
 RUN add-apt-repository ppa:ubuntu-toolchain-r/test
 RUN apt-get update
-RUN apt-get install libstdc++6 libstdc++-13-dev
+RUN apt-get install -y libstdc++6 libstdc++-13-dev
 
 RUN ln -s /usr/bin/clang++-16 /usr/bin/clang++
 RUN ln -s /usr/bin/clang-16 /usr/bin/clang
