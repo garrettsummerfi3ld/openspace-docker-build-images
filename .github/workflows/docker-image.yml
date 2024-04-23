@@ -7,26 +7,28 @@ on:
     branches: [ "**" ]
 
 jobs:
-  prepare:
+  setup:
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
-    - uses: actions/checkout@v4
-    - id: set-matrix
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Set Matrix
+      id: set-matrix
       run: |
-        DOCKERFILES=$(ls ${{ github.workspace }}/build/*.Dockerfile | xargs -n 1 basename)
+        DOCKERFILES=$(ls ${{ github.workspace }}/build/*.Dockerfile | jq -R -s -c 'split("\n")[:-1]')
         echo "::set-output name=matrix::{\"dockerfile\": [\"$DOCKERFILES\"]}"
 
   build:
-    needs: prepare
+    needs: setup
     runs-on: ubuntu-latest
     strategy:
-      matrix: ${{fromJson(needs.prepare.outputs.matrix)}}
+      matrix:
+        file: ${{fromJson(needs.setup.outputs.matrix)}}
     steps:
-    - uses: actions/checkout@v4
-    - name: Build Docker image
-      working-directory: ${{ github.workspace }}/build
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Run build job for ${{ matrix.dockerfile }}
       run: |
-        echo "Building ${{ matrix.dockerfile }}"
         docker build --tag "openspace-${{ matrix.dockerfile.Dockerfile }}" --file "${{ matrix.dockerfile }}" .
