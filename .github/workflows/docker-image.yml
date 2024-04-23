@@ -7,15 +7,26 @@ on:
     branches: [ "**" ]
 
 jobs:
-  build:
+  prepare:
     runs-on: ubuntu-latest
-    
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
     steps:
     - uses: actions/checkout@v4
-    - name: Build all build/ Docker images
+    - id: set-matrix
+      run: |
+        DOCKERFILES=$(ls ${{ github.workspace }}/build/*.Dockerfile | xargs -n 1 basename)
+        echo "::set-output name=matrix::{\"dockerfile\": [\"$DOCKERFILES\"]}"
+
+  build:
+    needs: prepare
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: ${{fromJson(needs.prepare.outputs.matrix)}}
+    steps:
+    - uses: actions/checkout@v4
+    - name: Build Docker image
       working-directory: ${{ github.workspace }}/build
       run: |
-        for f in *.Dockerfile; do
-          echo "Building $f"
-          docker build --tag "openspace-${f%.Dockerfile}" --file "$f" .
-        done
+        echo "Building ${{ matrix.dockerfile }}"
+        docker build --tag "openspace-${{ matrix.dockerfile%.Dockerfile }}" --file "${{ matrix.dockerfile }}" .
